@@ -6,10 +6,57 @@
     <h1> Programação e Administração de Banco de Dados </h1>
 </div>
 
+## No codespace:
+
+Execute esses dois comandos antes de criar a base de dados no Postgres:
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+sudo service postgresql start
+
 ## Objetivo
 
 Este repositório é destinado ao aprendizado dos conceitos do Programação e Administração de Banco de Dados.
 
+# Como executar os scripts SQL com PostgreSQL
+
+## Passo a passo
+
+1. Abra o terminal e acesse o PostgreSQL como superusuário:
+  ```bash
+  psql -U postgres
+  ```
+
+2. Crie o banco de dados:
+  ```sql
+  CREATE DATABASE vendas_online;
+  ```
+
+3. (Opcional) Crie um usuário e dê permissões:
+  ```sql
+  CREATE USER seu_usuario WITH PASSWORD 'sua_senha';
+  GRANT ALL PRIVILEGES ON DATABASE vendas_online TO seu_usuario;
+  ```
+
+4. Saia do psql:
+  ```sql
+  \q
+  ```
+
+5. Execute o script para criar as tabelas e inserir os dados:
+  ```bash
+  psql -U postgres -d vendas_online < scripts/consultas_sql/ddl_dml_vendas.sql
+  # Ou, se criou um usuário:
+  psql -U seu_usuario -d vendas_online < scripts/consultas_sql/ddl_dml_vendas.sql
+  ```
+
+6. Execute os comandos SELECT do arquivo `select.sql`:
+  ```bash
+  psql -U postgres -d vendas_online -f scripts/consultas_sql/select.sql
+  # Ou, se criou um usuário:
+  psql -U seu_usuario -d vendas_online -f scripts/consultas_sql/select.sql
+  ```
+
+Pronto! Agora você pode consultar e manipular os dados do banco normalmente.
 
 ## Metodologia
 

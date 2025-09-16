@@ -1,3 +1,13 @@
+-- A ordem básica é:
+
+-- 1FROM (de onde vêm os dados)
+-- 2JOIN (junta tabelas)
+-- 3WHERE (filtra os dados)
+-- 4GROUP BY (agrupa os dados, se necessário)
+-- 5HAVING (filtra grupos, se necessário)
+-- 6ORDER BY (ordena o resultado)
+-- 7LIMIT (limita o número de resultados)
+
 -- 1. Listagem de Usuários Ativos
 -- Escreva uma consulta que exiba o ID, nome, email e telefone de todos os usuários que estão ativos no sistema.
 
@@ -42,11 +52,27 @@ JOIN( SELECT categoria, MAX(preco) AS max_preco FROM produto GROUP BY categoria)
 -- 7. Clientes com Dados de Contato Incompletos
 -- Desenvolva uma consulta para identificar usuários ativos que não possuem telefone cadastrado.
 
+SELECT p.nome FROM usuario p WHERE p.telefoen is NULL;
+
 -- 8. Pedidos Pendentes de Entrega
 -- Faça uma consulta que liste todos os pedidos com status 'enviado', mostrando dados do cliente e endereço de entrega.
 
+SELECT
+  p.id_pedido,
+  u.nome AS nome_cliente,
+  u.email,
+  p.endereco_entrega
+FROM pedido p
+JOIN usuario u ON p.id_usuario = u.id_usuario -- Significa: “Junte a tabela de pedidos (p) com a tabela de usuários (u), onde o id_usuario do pedido é igual ao id_usuario do usuário”.
+WHERE p.status = 'enviado';
+
 -- 9. Detalhamento Completo de Pedidos
 -- Crie uma consulta que mostre, para um pedido específico (ID = 1), todas as informações: dados do cliente, produtos comprados, quantidades, preços unitários e subtotais.
+
+SELECT p.*, u.*
+FROM pedido p
+JOIN usuario u ON p.id_usuario = u.id_usuario
+WHERE p.id_pedido = 1;
 
 -- 10. Ranking dos Produtos Mais Vendidos
 -- Desenvolva uma consulta que liste os produtos ordenados pela quantidade total vendida (soma de todas as vendas). Mostre nome, categoria e total vendido.
