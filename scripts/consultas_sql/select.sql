@@ -77,18 +77,63 @@ WHERE p.id_pedido = 1;
 -- 10. Ranking dos Produtos Mais Vendidos
 -- Desenvolva uma consulta que liste os produtos ordenados pela quantidade total vendida (soma de todas as vendas). Mostre nome, categoria e total vendido.
 
+SELECT produto.nome,
+       produto.categoria,
+       SUM(item_pedido.quantidade) AS total_vendido
+FROM item_pedido
+JOIN produto ON item_pedido.id_produto = produto.id_produto
+GROUP BY produto.id_produto, produto.nome, produto.categoria
+ORDER BY total_vendido DESC;
+
 -- 11. Análise de Clientes Sem Compras
 -- Escreva uma consulta que identifique todos os usuários ativos que nunca fizeram um pedido no sistema.
+
+-- INNER JOIN: A ∩ B (só o que tem nos dois)
+-- LEFT JOIN:  A + (A ∩ B) (todos da esquerda + correspondências)
+-- RIGHT JOIN: (A ∩ B) + B (correspondências + todos da direita)
+-- FULL JOIN:  A ∪ B (todos de ambos)
+
+SELECT u.nome FROM usuario u
+LEFT JOIN pedido p ON u.id_usuario = p.id_usuario
+WHERE u.ativo = TRUE AND p.id_usuario IS NULL;
 
 -- 12. Estatísticas de Compras por Cliente
 -- Crie uma consulta que calcule, para cada cliente que já fez pedidos: número total de pedidos, valor médio por pedido e valor total gasto.
 
+SELECT u.nome,
+       COUNT(pedido.id_usuario) AS total_pedidos,
+       AVG(pedido.valor_total) as media_por_pedido,
+       SUM(pedido.valor_total) as soma_total 
+FROM usuario u
+JOIN pedido ON pedido.id_usuario = u.id_usuario
+GROUP BY u.id_usuario, u.nome
+ORDER BY u.nome;
+
 -- 13. Relatório Mensal de Vendas
 -- Desenvolva uma consulta que agrupe as vendas por mês/ano, mostrando: período, quantidade de pedidos, número de produtos diferentes vendidos e faturamento total.
+
+
 
 -- 14. Produtos que Nunca Foram Vendidos
 -- Faça uma consulta que identifique produtos ativos que nunca foram incluídos em nenhum pedido.
 
+SELECT p.nome, p.categoria, p.preco from produto p
+LEFT JOIN  item_pedido ON item_pedido.id_produto = p.id_produto
+WHERE p.ativo IS TRUE AND item_pedido.id_pedido IS NULL
+ORDER BY p.categoria, p.nome;
+
+
 -- 15. Análise de Ticket Médio por Categoria
 -- Crie uma consulta que calcule o ticket médio (valor médio de venda) para cada categoria de produto, considerando apenas pedidos não cancelados.
+
+SELECT produto.categoria,
+       COUNT(*) AS total_de_vendas,
+       AVG(ip.subtotal) AS ticket_medio
+FROM item_pedido ip
+JOIN produto p ON ip.id_produto = produto.id_produto
+JOIN pedido pd ON ip.id_pedido = pd.id_pedido
+WHERE pd.status != 'cancelado'
+GROUP BY p.categoria
+ORDER BY p.categoria;
+       
 
