@@ -73,7 +73,7 @@ CREATE TABLE pedido (
 -- ==========================================
 -- TABELA: ITENS_PEDIDO
 -- ==========================================
-CREATE TABLE itens_pedido (
+CREATE TABLE item_pedido (
     id_item SERIAL PRIMARY KEY,
     id_pedido INTEGER NOT NULL,
     id_produto INTEGER NOT NULL,
