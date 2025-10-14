@@ -29,7 +29,7 @@ class Parceiro(models.Model):
     
     status_parceria = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Em Análise')
     observacao_status_parceria = models.TextField(blank=True, null=True)
-    # cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE, related_name='parceiros')
+    cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE, related_name='parceiros')
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='parceiro')
         
     def __str__(self):
