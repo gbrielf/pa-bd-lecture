@@ -8,6 +8,7 @@ router = DefaultRouter() #rota padrao do rest framework
 router.register(r'usuarios', views.UsuarioViewSet) #registra a viewset (rota personalizada) criada na view 3
 router.register(r'rudieros', views.RudieroViewSet) #registra a viewset (rota personalizada) criada na view 3
 router.register(r'parceiros', views.ParceiroViewSet) #registra a viewset (rota personalizada) criada na view 3
+router.register(r'servicos', views.ServicoViewSet) #registra a viewset (rota personalizada) criada na view 3
 
 urlpatterns = [
     path('admin/', admin.site.urls),
