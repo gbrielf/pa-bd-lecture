@@ -16,8 +16,19 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from core import views
+
+router = DefaultRouter()
+router.register(r'usuarios', views.UsuarioViewSet)
+router.register(r'projetos', views.ProjetoViewSet)
+router.register(r'colunas', views.ColunaViewSet)
+router.register(r'tarefas', views.TarefaViewSet)
+router.register(r'comentarios', views.ComentarioViewSet)
+router.register(r'etiquetas', views.EtiquetaViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("kanban_api/", include(router.urls)),
 ]

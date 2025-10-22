@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Etiqueta(models.Model):
+    nome = models.CharField(max_length=50)
+    cor = models.CharField(max_length=7)  # Exemplo: #RRGGBB
+
+    def __str__(self):
+        return self.nome
+
 class Usuario(User):
     
     def __str__(self):
@@ -13,7 +20,7 @@ class Projeto(models.Model):
     data_criacao = models.DateTimeField(auto_now_add=True)
     proprietario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     membros = models.ManyToManyField(Usuario, related_name='membros_projetos', blank=True)
-
+    
     def __str__(self):
         return self.nome
 
@@ -48,9 +55,3 @@ class Comentario(models.Model):
     def __str__(self):
         return f"Comentario de {self.autor} em {self.tarefa}"
 
-class Etiqueta(models.Model):
-    nome = models.CharField(max_length=50)
-    cor = models.CharField(max_length=7)  # Exemplo: #RRGGBB
-
-    def __str__(self):
-        return self.nome
