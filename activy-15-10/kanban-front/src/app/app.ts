@@ -7,7 +7,7 @@ import { KanbanBoard } from './pages/kanban-board/kanban-board';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [TaskCard, Column, KanbanBoard, CommonModule],
+  imports: [TaskCard, Column, KanbanBoard, CommonModule, Button],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

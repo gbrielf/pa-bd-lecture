@@ -14,6 +14,5 @@ export class Column {
   @Input() titulo!: string;
   @Input() ordem!: number;
   @Input() projeto!: string;
-
   @Input() tasks: Tarefa[] = []; 
 }
