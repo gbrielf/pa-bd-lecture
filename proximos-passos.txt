@@ -1,0 +1,5 @@
+- reiniciar o projeto OK
+
+- tailwindcss @tailwindcss/postcss postcss são dependencies OK
+
+- package-lock.json é do npm, deletar todo o nodule_module e o pack-lock

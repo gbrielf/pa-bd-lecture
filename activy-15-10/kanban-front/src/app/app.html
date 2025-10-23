@@ -1,9 +1,16 @@
-<main class="flex min-h-screen items-center justify-center p-4 gap-3">
-  <div>
-    <h2>Crie Sua Nova Nota:</h2>
-    <form action=""></form>
-  </div>
-</main>
+<p-menubar [model]="items">
+  
+  <ng-template #start>
+    <a routerLink="/kanban" class="flex items-center gap-2 p-2 mr-4">
+      <i class="pi pi-bolt" style="font-size: 1.5rem"></i> 
+      <span class="font-bold text-lg">LogoBesta</span>
+    </a>
+  </ng-template>
+
+  </p-menubar>
+
+<router-outlet></router-outlet>
+
 <!-- COLUMNS A BAIXO -->
 
 <!-- <main class="flex min-h-screen items-center justify-center p-4 gap-3">

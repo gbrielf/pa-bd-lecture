@@ -1,16 +1,33 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Remova 'inject' daqui
 import { CommonModule } from '@angular/common';
-import { TaskCard } from './components/task-card/task-card';
-import { Column } from './components/column/column';
-import { KanbanBoard } from './pages/kanban-board/kanban-board';
+import { RouterOutlet } from '@angular/router';
+import { MenubarModule } from 'primeng/menubar';
+import { MenuItem } from 'primeng/api';
+// 1. Importe SÓ o CardCreator
+// (Ajuste o caminho se o nome do arquivo for card-creator.component.ts)
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [TaskCard, Column, KanbanBoard, CommonModule, Button],
+  // 2. Imports é SÓ o CommonModule e o CardCreator
+  imports: [CommonModule, RouterOutlet, MenubarModule],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
 })
-export class App {
-  protected readonly title = signal('kanban-front');
+export class App implements OnInit {
+  protected items: MenuItem[] = [];
+
+  ngOnInit(){
+    this.items = [
+      {label: 'Kanban',
+        icon: 'pi pi-fw pi-pencil',
+        routerLink: ['/kanban']
+      },
+      {
+        label: 'Criar Tarefa',
+        icon: 'pi pi-fw pi-plus',
+        routerLink: ['/criar-tarefa']
+      }
+    ];
+  }
 }

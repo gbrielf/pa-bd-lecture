@@ -5,7 +5,7 @@ import { Tarefa } from '../../core/models/tarefa.model';
 
 @Component({
   selector: 'app-column',
-  imports: [TaskCard, CommonModule],
+  imports: [ CommonModule],
   templateUrl: './column.html',
   styleUrls: ['./column.css'],
   standalone: true
