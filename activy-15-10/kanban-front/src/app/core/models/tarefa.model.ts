@@ -9,6 +9,6 @@ export interface Tarefa{
     criador: number; //id do usuario
     prioridade: string;
     data_criacao: string;
-    data_conclusao?: string;
+    data_conclusao?: string | null;
     tags?: Etiqueta[];
 }

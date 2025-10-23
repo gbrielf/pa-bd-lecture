@@ -1,13 +1,13 @@
 <p-menubar [model]="items">
-  
   <ng-template #start>
     <a routerLink="/kanban" class="flex items-center gap-2 p-2 mr-4">
-      <i class="pi pi-bolt" style="font-size: 1.5rem"></i> 
-      <span class="font-bold text-lg">LogoBesta</span>
+      <i class="pi pi-bolt" style="font-size: 1.5rem"></i>
+      <!-- Substituído pelo logo enviado: coloque o arquivo em /src/assets/kanplan.png -->
+      <img src="/assets/kanplan.png" alt="KanPlan" class="h-8 mr-2" />
+      <span class="font-bold text-lg">KanPlan</span>
     </a>
   </ng-template>
-
-  </p-menubar>
+</p-menubar>
 
 <router-outlet></router-outlet>
 

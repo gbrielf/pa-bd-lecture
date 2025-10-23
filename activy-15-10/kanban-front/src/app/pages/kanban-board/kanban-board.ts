@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
-import { TaskCard } from '../../components/task-card/task-card';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { ChartModule } from 'primeng/chart';
-import { MenubarModule } from 'primeng/menubar';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { BoardStateService } from '../../core/services/board-state';
+import { Coluna } from '../../core/models/coluna.model';
 import { Column } from '../../components/column/column';
 
 @Component({
   selector: 'app-kanban-board',
-  imports: [InputTextModule, ButtonModule, ChartModule, MenubarModule, TaskCard, Column],
+  imports: [CommonModule, Column],
   templateUrl: './kanban-board.html',
   styleUrls: ['./kanban-board.css'],
-  standalone: true
+  standalone: true,
 })
 export class KanbanBoard {
+  // Injete o "Cérebro"
+  private boardStateService = inject(BoardStateService);
 
+  // NÃO guarde a lista aqui. Guarde o "canal" (Observable)
+  protected colunasDoQuadro$: Observable<Coluna[]>;
+
+  constructor() {
+    // "Assine" o canal
+    this.colunasDoQuadro$ = this.boardStateService.getBoardState();
+  }
 }

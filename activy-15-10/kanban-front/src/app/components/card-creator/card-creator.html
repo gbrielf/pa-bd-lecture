@@ -1,4 +1,4 @@
-<div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+<div class="bg-white p-6 rounded-lg shadow-lg w-xs max-w-md h-">
   <h2 class="text-2xl font-bold mb-4 text-gray-800">Crie Sua Nova Tarefa:</h2>
 
   <form [formGroup]="novaTarefaForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
@@ -10,7 +10,7 @@
         formControlName="titulo"
         placeholder="Título da tarefa"
         required
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+        class="mt-1 p-2 w-full border border-gray-300 rounded-md text-gray-200 focus:text-gray-500"
       />
     </div>
 
@@ -22,7 +22,7 @@
         id="descricao-da-nota"
         formControlName="descricao"
         placeholder="Detalhes da tarefa..."
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+        class="mt-1 p-2 w-full border border-gray-300 rounded-md text-gray-200 focus:text-gray-500"
       ></textarea>
     </div>
 
@@ -35,7 +35,7 @@
         id="responsavel-pela-tarefa"
         formControlName="responsavel"
         placeholder="ID do Responsável"
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+        class="mt-1 p-2 w-full border border-gray-300 rounded-md text-gray-200 focus:text-gray-500"
       />
     </div>
 
@@ -47,12 +47,12 @@
         formControlName="criador"
         placeholder="ID do Criador"
         required
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+        class="mt-1 p-2 w-full border border-gray-300 rounded-md text-gray-200 focus:text-gray-500"
       />
     </div>
 
     <div>
-      <p-button label="Salvar Tarefa" type="submit" styleClass="w-full"></p-button>
+      <p-button label="Salvar Tarefa" type="submit" class="font-bold"  styleClass="w-full" [disabled]="novaTarefaForm.invalid"></p-button>
     </div>
   </form>
 </div>
