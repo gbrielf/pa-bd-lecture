@@ -1,5 +1,5 @@
 export interface Etiqueta {
     id: number;
-    username: string;
+    nome: string;
     cor: string;
 }

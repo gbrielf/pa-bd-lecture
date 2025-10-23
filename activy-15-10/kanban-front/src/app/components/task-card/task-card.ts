@@ -8,15 +8,15 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-task-card',
   standalone: true,
-  imports: [CardModule, TagModule, ButtonModule],
+  imports: [CardModule, TagModule, ButtonModule, CommonModule],
   templateUrl: './task-card.html',
   styleUrls: ['./task-card.css']
 })
 export class TaskCard {
-  @Input() titulo!: string;
-  @Input() descricao!: string;
-  @Input() responsavel!: string;
-  @Input() criador!: string;
-  @Input() prioridade!: string;
+  @Input() titulo: string = 'Título de exemplo';
+  @Input() descricao: string = '';
+  @Input() responsavel: number = 0;
+  @Input() criador: number = 0;
+  @Input() prioridade: string = 'low';
   @Input() tags: Etiqueta[] = [];
 }

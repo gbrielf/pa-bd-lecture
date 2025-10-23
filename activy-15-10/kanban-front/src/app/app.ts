@@ -1,8 +1,8 @@
-import { Column } from './components/column/column';
-import { TaskCard } from './components/task-card/task-card';
 import { Component, signal } from '@angular/core';
-import { KanbanBoard } from './pages/kanban-board/kanban-board';
 import { CommonModule } from '@angular/common';
+import { TaskCard } from './components/task-card/task-card';
+import { Column } from './components/column/column';
+import { KanbanBoard } from './pages/kanban-board/kanban-board';
 
 @Component({
   standalone: true,
