@@ -3,6 +3,7 @@ import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button'; // opcional para botões depois
 import { Etiqueta } from '../../core/models/etiqueta.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-card',
