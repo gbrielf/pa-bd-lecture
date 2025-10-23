@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TaskCard } from '../task-card/task-card';
+import { CommonModule } from '@angular/common';
+import { Tarefa } from '../../core/models/tarefa.model';
 
 @Component({
   selector: 'app-column',
-  imports: [],
+  imports: [TaskCard, CommonModule],
   templateUrl: './column.html',
-  styleUrl: './column.css'
+  styleUrls: ['./column.css'],
+  standalone: true
 })
 export class Column {
+  @Input() titulo!: string;
+  @Input() ordem!: number;
+  @Input() projeto!: string;
 
+  @Input() tasks: Tarefa[] = []; 
 }

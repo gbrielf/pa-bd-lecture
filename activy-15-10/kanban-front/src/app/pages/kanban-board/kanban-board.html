@@ -1,0 +1,22 @@
+<div class="min-h-screen bg-gray-100">
+  <div class="bg-blue-600 text-white text-3xl font-bold px-8 py-6 mb-6">
+    Kanban Board
+  </div>
+  <div class="flex gap-6 justify-center">
+    <!-- Coluna To Do -->
+    <app-column titulo="To Do">
+      <app-task-card titulo="Task 1" prioridade="new"></app-task-card>
+      <app-task-card titulo="Task 2" prioridade="low"></app-task-card>
+      <app-task-card titulo="Task 3" prioridade="high"></app-task-card>
+    </app-column>
+    <!-- Coluna Doing -->
+    <app-column titulo="Doing">
+      <app-task-card titulo="Task 4" prioridade="medium"></app-task-card>
+      <app-task-card titulo="Task 5" prioridade="medium"></app-task-card>
+    </app-column>
+    <!-- Coluna Done -->
+    <app-column titulo="Done">
+      <app-task-card titulo="Task 6" prioridade="low"></app-task-card>
+    </app-column>
+  </div>
+</div>
