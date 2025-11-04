@@ -47,16 +47,17 @@ export class BoardStateService {
   addTarefa(novaTarefa: Tarefa) {
     // Pega o estado atual do quadro
     const colunasAtuais = [...this.board.value];
-    const colunaToDo = colunasAtuais.find((col) => col.ordem === 1);
+    const colunaToDo = colunasAtuais.find((col) => col.id === novaTarefa.coluna);
     // Encontra a coluna "A Fazer" (ordem 1)
     // const colunaToDo = colunasAtuais.find((col) => col.ordem === 1);
 
     if (colunaToDo) {
       // Simula a API: cria um ID e adiciona a tarefa
       colunaToDo.tarefas.push(novaTarefa);
-
       // AVISA TODOS OS "ASSINANTES" que o quadro mudou!
       this.board.next(colunasAtuais);
+    }else{
+      this.loadInitialBoard();
     }
   }
 
