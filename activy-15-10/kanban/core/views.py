@@ -3,7 +3,6 @@ from .serializers import EtiquetaSerializer, UsuarioSerializer, ColunaSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import authentication_classes,permission_classes  # type: ignore
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication  # type: ignore
-from rest_framework.permissions import IsAuthenticated  # type: ignore
 from django.shortcuts import get_object_or_404  # type: ignore
 from rest_framework.decorators import action
 from django.db.models import Count, Max, Min, Sum
@@ -43,7 +42,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     @api_view(['GET'])
     @authentication_classes([TokenAuthentication, SessionAuthentication])
     @permission_classes([IsAuthenticated])
-    def test_toker(request):
+    def test_token(request):
         return Response("passou para {}".format(request.user.email))
 
 
