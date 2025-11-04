@@ -1,58 +1,38 @@
-<div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-  <h2 class="text-2xl font-bold mb-4 text-gray-800">Crie Sua Nova Tarefa:</h2>
+<div class="flex items-center justify-center min-h-screen">
 
-  <form [formGroup]="novaTarefaForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
-    <div>
-      <label for="titulo-da-nota" class="block text-sm font-medium text-gray-700">Título</label>
-      <input
-        type="text"
-        id="titulo-da-nota"
-        formControlName="titulo"
-        placeholder="Título da tarefa"
-        required
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
-      />
-    </div>
+  <div class="max-w-md p-6 bg-white rounded-lg shadow-lg align-items alig w-xs h-">
+    <h2 class="mb-4 text-2xl font-bold text-gray-800">Crie Sua Nova Tarefa:</h2>
 
-    <div>
-      <label for="descricao-da-nota" class="block text-sm font-medium text-gray-700"
-        >Descrição</label
-      >
-      <textarea
-        id="descricao-da-nota"
-        formControlName="descricao"
-        placeholder="Detalhes da tarefa..."
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
-      ></textarea>
-    </div>
+    <form [formGroup]="novaTarefaForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+      <div>
+        <label for="titulo-da-nota" class="block text-sm font-medium text-gray-700">Título</label>
+        <input type="text" id="titulo-da-nota" formControlName="titulo" placeholder="Título da tarefa" required
+          class="w-full p-2 mt-1 text-gray-200 border border-gray-300 rounded-md focus:text-gray-500" />
+      </div>
 
-    <div>
-      <label for="responsavel-pela-tarefa" class="block text-sm font-medium text-gray-700"
-        >Responsável</label
-      >
-      <input
-        type="text"
-        id="responsavel-pela-tarefa"
-        formControlName="responsavel"
-        placeholder="ID do Responsável"
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
-      />
-    </div>
+      <div>
+        <label for="descricao-da-nota" class="block text-sm font-medium text-gray-700">Descrição</label>
+        <textarea id="descricao-da-nota" formControlName="descricao" placeholder="Detalhes da tarefa..."
+          class="w-full p-2 mt-1 text-gray-200 border border-gray-300 rounded-md focus:text-gray-500"></textarea>
+      </div>
 
-    <div>
-      <label for="criador-da-tarefa" class="block text-sm font-medium text-gray-700">Criador</label>
-      <input
-        type="text"
-        id="criador-da-tarefa"
-        formControlName="criador"
-        placeholder="ID do Criador"
-        required
-        class="mt-1 p-2 w-full border border-gray-300 rounded-md"
-      />
-    </div>
+      <div>
+        <label for="responsavel-pela-tarefa" class="block text-sm font-medium text-gray-700">Responsável</label>
+        <input type="text" id="responsavel-pela-tarefa" formControlName="responsavel" placeholder="ID do Responsável"
+          class="w-full p-2 mt-1 text-gray-200 border border-gray-300 rounded-md focus:text-gray-500" />
+      </div>
 
-    <div>
-      <p-button label="Salvar Tarefa" type="submit" styleClass="w-full"></p-button>
-    </div>
-  </form>
+      <div>
+        <label for="criador-da-tarefa" class="block text-sm font-medium text-gray-700">Criador</label>
+        <input type="text" id="criador-da-tarefa" formControlName="criador" placeholder="ID do Criador" required
+          class="w-full p-2 mt-1 text-gray-200 border border-gray-300 rounded-md focus:text-gray-500" />
+      </div>
+
+      <div>
+        <p-button label="Salvar Tarefa" type="submit" class="font-bold" styleClass="w-full"
+          [disabled]="novaTarefaForm.invalid"></p-button>
+      </div>
+    </form>
+  </div>
+
 </div>
