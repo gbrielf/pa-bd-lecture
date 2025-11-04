@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 
+import { Tarefa } from '../../core/models/tarefa.model';
 import { TarefaService } from '../../core/services/tarefa.service';
-import {BoardStateService} from '../../core/services/board-state.service';
+import {BoardStateService} from '../../core/services/board-state';
 import { Router } from '@angular/router';
 
 
@@ -20,7 +21,7 @@ export class CardCreatorComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
-  private tarefaService: inject(TarefaService);
+  private tarefaService = inject(TarefaService);
   private boardStateService = inject(BoardStateService);
 
   onSubmit(): void{
@@ -28,20 +29,21 @@ export class CardCreatorComponent {
       console.log('Formulário válido. Enviando para a API real...');
       const novaTarefa = this.novaTarefaForm.value as Partial<Tarefa>;
 
-      this.tarefaService.createTarefa(novaTarefa).subscribe({
-        next: (tarefaCriada) => {
-          console.log('API respondeu com sucesso:', tarefaCriadaApi);
+      this.tarefaService.createTarefa(novaTarefa).subscribe(
+        {next: (tarefaCriada) => {
+          console.log('API respondeu com sucesso:', tarefaCriada);
 
-          this.boardStateService.addTarefa(tarefaCriadaApi);
+          this.boardStateService.addTarefa(tarefaCriada);
 
           this.novaTarefaForm.reset();
           this.novaTarefaForm.patchValue({ prioridade: 'Média' });
           this.router.navigate(['/kanban']);
-        }
-        error: (err) => {
+        },
+        error: (err: any) => {
           console.error('Erro ao criar tarefa via API:', err);
-        }
-    });}else{
+          // adicionar mensagem de erro depois
+        }});
+      }else{
       console.error('Formulário inválido!');
       this.novaTarefaForm.markAllAsTouched();
     }
