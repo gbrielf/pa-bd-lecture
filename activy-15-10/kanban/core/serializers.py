@@ -10,9 +10,10 @@ class EtiquetaSerializer(serializers.ModelSerializer):
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
     class Meta:
         model = Usuario
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'password']
         read_only_fields = ['id']
 
 
