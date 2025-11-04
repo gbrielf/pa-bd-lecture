@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@plugin "tailwindcss-primeui";
+
+
+.montserrat{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100,200,300,400,500,600,700,800,900;
+  font-style: normal;
+}
+
+body {
+  background-color: #001526;
+  font-family: 'Montserrat', sans-serif;
+}

@@ -1,0 +1,44 @@
+<div class="mb-4" *ngIf="tarefa" class="shadow-lg">
+  <p-card [style]="{ width: '100%', overflow: 'hidden' }" class="border-2 border-white border-solid ">
+    <ng-template #title>
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">{{ tarefa.titulo }}</h3>
+        <div class="flex gap-1">
+          <p-tag *ngFor="let tag of tarefa.tags" [value]="tag.nome"
+            [style]="{ 'background-color': tag.cor, color: 'white' }">
+          </p-tag>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #subtitle>
+      <p class="mb-2 text-sm ">
+        Prioridade:
+        <strong>{{ tarefa.prioridade }}</strong>
+      </p>
+    </ng-template>
+
+    <div class="flex flex-col justify-center gap-2 text-align">
+      <p>{{ tarefa.descricao }}</p>
+
+      <span class="text-xs text-gray-600">Responsável: {{ tarefa.responsavel }}</span>
+      <span class="text-xs text-gray-600">Criador: {{ tarefa.criador }}</span>
+
+      <div class="flex flex-wrap gap-1" *ngIf="tarefa.tags && tarefa.tags.length > 0"></div>
+    </div>
+
+    <ng-template #footer>
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex gap-2">
+          <p-button  label="Editar" severity="secondary" outlined="true" (click)="onEditar()" class="font-bold"></p-button>
+          <p-button label="Excluir" severity="danger" (click)="onExcluir()"></p-button>
+        </div>
+
+        <div>
+          <p-button icon="pi pi-step-forward" class="p-button-rounded p-button-text" (click)="onPular()"
+            [disabled]="!tarefa">Next</p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

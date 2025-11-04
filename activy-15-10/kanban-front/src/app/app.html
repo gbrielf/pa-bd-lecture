@@ -1,0 +1,51 @@
+<p-menubar [model]="items">
+  <ng-template #start>
+    <a routerLink="/kanban" class="flex items-center gap-2">
+      <i class="pi pi-bolt" style="font-size: 1.5rem"></i>
+      <!-- Substituído pelo logo enviado: coloque o arquivo em /src/assets/kanplan.png -->
+      <img src="assets/kanban-plan.png" alt="KanPlan" class="mr-2 h-14" />
+    </a>
+  </ng-template>
+</p-menubar>
+
+<router-outlet></router-outlet>
+
+<!-- COLUMNS A BAIXO -->
+
+<!-- <main class="flex items-center justify-center min-h-screen gap-3 p-4">
+  
+  <app-column 
+    *ngFor="let col of colunasDoQuadro" 
+    [coluna]="col">
+  </app-column>
+
+</main> -->
+
+<!-- <main class="flex items-center justify-center min-h-screen gap-3 p-4">
+  <div class="flex flex-col p-2 bg-orange-300 gap-4 w-90 h-[60vh] text-center rounded-t-lg">
+    <h2 class="text-4xl text-[#0D1526] font-bold mb-2"> 1a coluna </h2>
+    <ng-content></ng-content>
+  </div>
+  <div class="flex flex-col p-2 bg-yellow-300 gap-4 w-90 h-[60vh] text-center rounded-t-lg">
+    <h2 class="text-4xl text-[#0D1526] font-bold mb-2"> 2a coluna </h2>
+    <ng-content></ng-content>
+  </div>
+  <div class="flex flex-col p-2 bg-lime-300 gap-4 w-90 h-[60vh] text-center rounded-t-lg">
+    <h2 class="text-4xl text-[#0D1526] font-bold mb-2"> 3a coluna </h2>
+    <ng-content></ng-content>
+  </div>
+</main> -->
+
+<!-- TASK-CARDS A BAIXO -->
+
+<!-- <main class="flex justify-center p-4">
+  <div class="w-full max-w-sm"> <app-task-card
+      [titulo]="'Exemplo de Título'"
+      [descricao]="'Descrição de exemplo para visualização lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet.lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet.lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet.'"
+      [responsavel]="1"
+      [criador]="2"
+      [prioridade]="'high'"
+      [tags]="[{ id: 1, nome: 'bug', cor: '#e53e3e' }]">
+    </app-task-card>
+
+  </div> -->
