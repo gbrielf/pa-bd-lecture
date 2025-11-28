@@ -1,17 +1,50 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+class Usuario(AbstractUser):
+    
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.username}"
+
+
+class Perfil(models.Model):
+    TIPO_PERFIL_CHOICES = [
+        ('ADMINISTRADOR', 'Administrador'),
+        ('GERENTE', 'Gerente'),
+        ('DESENVOLVEDOR', 'Desenvolvedor'),
+        ('STAKEHOLDER', 'Stakeholder'),
+        ('TESTER', 'Tester'),
+    ]
+
+    usuario = models.OneToOneField(
+        Usuario,
+        on_delete=models.CASCADE,
+        related_name='perfil',
+    )
+    tipo = models.CharField(
+        max_length=20,
+        choices=TIPO_PERFIL_CHOICES,
+    )
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.usuario.username} - {self.get_tipo_display()}"  # pylint: disable=no-member
+
 
 class Etiqueta(models.Model):
     nome = models.CharField(max_length=50)
     cor = models.CharField(max_length=7)  # Exemplo: #RRGGBB
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome}"
 
-class Usuario(User):
-    
-    def __str__(self):
-        return f"{self.username} - {self.email}"
 
 # Create your models here.
 class Projeto(models.Model):
@@ -22,16 +55,18 @@ class Projeto(models.Model):
     membros = models.ManyToManyField(Usuario, related_name='membros_projetos', blank=True)
     
     def __str__(self):
-        return self.nome
+        return f"{self.nome}"
+
 
 class Coluna(models.Model):
     titulo = models.CharField(max_length=100)
-    ordem = models.IntegerField() # para ordenação
+    ordem = models.IntegerField()  # para ordenação
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE, related_name='colunas')
 
     def __str__(self):
-        return self.titulo
+        return f"{self.titulo}"
     
+
 class Tarefa(models.Model):
     titulo = models.CharField(max_length=100)
     descricao = models.TextField(blank=True, null=True)
@@ -44,8 +79,9 @@ class Tarefa(models.Model):
     tags = models.ManyToManyField(Etiqueta, blank=True)
 
     def __str__(self):
-        return self.titulo
-    
+        return f"{self.titulo}"
+
+
 class Comentario(models.Model):
     tarefa = models.ForeignKey(Tarefa, on_delete=models.CASCADE, related_name='comentarios')
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -54,4 +90,3 @@ class Comentario(models.Model):
 
     def __str__(self):
         return f"Comentario de {self.autor} em {self.tarefa}"
-

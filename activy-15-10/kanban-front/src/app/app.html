@@ -1,10 +1,9 @@
 <p-menubar [model]="items">
   <ng-template #start>
-    <a routerLink="/kanban" class="flex items-center gap-2 p-2 mr-4">
+    <a routerLink="/kanban" class="flex items-center gap-2">
       <i class="pi pi-bolt" style="font-size: 1.5rem"></i>
-      <!-- Substituído pelo logo enviado: coloque o arquivo em /src/assets/kanplan.png -->
-      <img src="/assets/kanplan.png" alt="KanPlan" class="h-8 mr-2" />
-      <span class="font-bold text-lg">KanPlan</span>
+      <!-- Logo do KanPlan localizado em public/images/ -->
+      <img src="images/kanban-plan.png" alt="KanPlan" class="mr-2 h-14" />
     </a>
   </ng-template>
 </p-menubar>
@@ -13,7 +12,7 @@
 
 <!-- COLUMNS A BAIXO -->
 
-<!-- <main class="flex min-h-screen items-center justify-center p-4 gap-3">
+<!-- <main class="flex items-center justify-center min-h-screen gap-3 p-4">
   
   <app-column 
     *ngFor="let col of colunasDoQuadro" 
@@ -22,7 +21,7 @@
 
 </main> -->
 
-<!-- <main class="flex min-h-screen items-center justify-center p-4 gap-3">
+<!-- <main class="flex items-center justify-center min-h-screen gap-3 p-4">
   <div class="flex flex-col p-2 bg-orange-300 gap-4 w-90 h-[60vh] text-center rounded-t-lg">
     <h2 class="text-4xl text-[#0D1526] font-bold mb-2"> 1a coluna </h2>
     <ng-content></ng-content>

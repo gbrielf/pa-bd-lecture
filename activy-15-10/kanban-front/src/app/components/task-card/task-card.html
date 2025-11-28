@@ -1,14 +1,11 @@
 <div class="mb-4" *ngIf="tarefa">
   <p-card [style]="{ width: '100%', overflow: 'hidden' }">
     <ng-template #title>
-      <div class="flex justify-between items-center">
+      <div class="flex items-center justify-between">
         <h3 class="text-lg font-semibold">{{ tarefa.titulo }}</h3>
         <div class="flex gap-1">
-          <p-tag
-            *ngFor="let tag of tarefa.tags"
-            [value]="tag.nome"
-            [style]="{ 'background-color': tag.cor, color: 'white' }"
-          >
+          <p-tag *ngFor="let tag of tarefa.tags" [value]="tag.nome"
+            [style]="{ 'background-color': tag.cor, color: 'white' }">
           </p-tag>
         </div>
       </div>
@@ -21,34 +18,29 @@
       </p>
     </ng-template>
 
-    <div class="flex flex-col text-align justify-center gap-2">
+    <div class="flex flex-col justify-center gap-2 text-align">
       <p>{{ tarefa.descricao }}</p>
 
       <span class="text-xs text-gray-600">Responsável: {{ tarefa.responsavel }}</span>
       <span class="text-xs text-gray-600">Criador: {{ tarefa.criador }}</span>
 
-      <div class="flex gap-1 flex-wrap" *ngIf="tarefa.tags && tarefa.tags.length > 0"></div>
+      <div class="flex flex-wrap gap-1" *ngIf="tarefa.tags && tarefa.tags.length > 0"></div>
     </div>
 
     <ng-template #footer>
       <div class="flex items-center justify-between gap-2">
         <div class="flex gap-2">
-          <p-button
-            label="Editar"
-            severity="secondary"
-            outlined="true"
-            (click)="onEditar()"
-          ></p-button>
-          <p-button label="Excluir" severity="danger" (click)="onExcluir()"></p-button>
+          <p-button label="Mover" icon="pi pi-arrow-right" severity="info" outlined="true" size="small"
+            (click)="onEditar()" title="Mover para outra coluna"></p-button>
+          <p-button label="Excluir" icon="pi pi-trash" severity="danger" size="small" (click)="onExcluir()"
+            title="Excluir tarefa"></p-button>
         </div>
 
-        <div>
-          <p-button
-            icon="pi pi-step-forward"
-            class="p-button-rounded p-button-text"
-            (click)="onPular()"
-            [disabled]="!tarefa"
-          >Next</p-button>
+        <div class="flex gap-1">
+          <p-button icon="pi pi-step-backward" class="p-button-rounded p-button-text" (click)="onVoltar()"
+            [disabled]="!tarefa" title="Voltar para coluna anterior">Anterior</p-button>
+          <p-button icon="pi pi-step-forward" class="p-button-rounded p-button-text" (click)="onPular()"
+            [disabled]="!tarefa" title="Avançar para próxima coluna">Próximo</p-button>
         </div>
       </div>
     </ng-template>

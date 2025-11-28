@@ -67,11 +67,15 @@ export class CardCreatorComponent {
       // (Amanhã, vamos "embrulhar" isso com a chamada real da API)
       this.boardStateService.addTarefa(novaTarefa);
 
-      // 3. Limpa o formulário para a próxima vez
+      // 3. Confirma a criação para o usuário
+      console.log(`✅ Tarefa "${novaTarefa.titulo}" criada na coluna "A Fazer"`);
+      alert(`✅ Tarefa "${novaTarefa.titulo}" criada com sucesso!\nEla foi adicionada na coluna "A Fazer".`);
+
+      // 4. Limpa o formulário para a próxima vez
       this.novaTarefaForm.reset();
       this.novaTarefaForm.patchValue({ prioridade: 'Média' }); // Reseta o valor padrão
 
-      // 4. MANDA O USUÁRIO DE VOLTA PARA O KANBAN!
+      // 5. MANDA O USUÁRIO DE VOLTA PARA O KANBAN!
       this.router.navigate(['/kanban']);
     } else {
       // Se o formulário for inválido (ex: título em branco)

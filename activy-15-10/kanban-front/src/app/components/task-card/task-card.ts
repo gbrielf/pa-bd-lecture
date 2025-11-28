@@ -35,8 +35,17 @@ export class TaskCard {
   onEditar() {
     if (!this.tarefa) return;
 
-    // Pergunta ao usuário o id da coluna de destino (simples prompt de dev)
-    const resposta = window.prompt('Mover tarefa para coluna (informe o id da coluna):');
+    // Interface mais amigável para mover tarefa
+    const colunas = this.boardStateService.getBoardColumns();
+    const opcoesText = colunas
+      .filter((col) => col.id !== this.colunaId) // Remove coluna atual das opções
+      .map((col) => `${col.id}: ${col.titulo}`)
+      .join('\n');
+    
+    const resposta = window.prompt(
+      `Mover "${this.tarefa.titulo}" para qual coluna?\n\n${opcoesText}\n\nDigite o ID da coluna:`
+    );
+    
     if (!resposta) return;
 
     const destino = Number(resposta);
@@ -45,7 +54,14 @@ export class TaskCard {
       return;
     }
 
+    const colunaDestino = colunas.find((col) => col.id === destino);
+    if (!colunaDestino) {
+      alert('Coluna não encontrada');
+      return;
+    }
+
     this.boardStateService.moveTarefa(this.tarefa.id, destino);
+    console.log(`✅ Tarefa "${this.tarefa.titulo}" movida para "${colunaDestino.titulo}"`);
   }
 
   onPular() {
@@ -59,5 +75,18 @@ export class TaskCard {
     }
 
     this.boardStateService.moveTarefa(this.tarefa.id, nextId);
+  }
+
+  onVoltar() {
+    if (!this.tarefa || this.colunaId == null) return;
+
+    const previousId = this.boardStateService.getPreviousColumnId(this.colunaId);
+    if (previousId == null) {
+      // já está na primeira coluna
+      alert('Não há coluna anterior para voltar.');
+      return;
+    }
+
+    this.boardStateService.moveTarefa(this.tarefa.id, previousId);
   }
 }

@@ -140,6 +140,15 @@ export class BoardStateService {
     return next ? next.id : null;
   }
 
+  // Retorna o id da coluna anterior (ordem inferior). Se for a primeira, retorna null.
+  getPreviousColumnId(currentColunaId: number): number | null {
+    const cols = this.board.value;
+    const index = cols.findIndex((c) => c.id === currentColunaId);
+    if (index === -1 || index === 0) return null;
+    const previous = cols[index - 1];
+    return previous ? previous.id : null;
+  }
+
   // Move uma tarefa para a próxima coluna (se existir)
   moveTarefaToNext(tarefaId: number, currentColunaId: number) {
     const nextId = this.getNextColumnId(currentColunaId);
@@ -148,5 +157,10 @@ export class BoardStateService {
       return;
     }
     this.moveTarefa(tarefaId, nextId);
+  }
+
+  // Retorna todas as colunas disponíveis (útil para interfaces de seleção)
+  getBoardColumns(): Coluna[] {
+    return [...this.board.value];
   }
 }

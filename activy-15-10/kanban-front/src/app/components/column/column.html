@@ -1,15 +1,11 @@
-<div *ngIf="coluna" 
-  class="flex flex-col p-2 gap-4 w-90 h-fit text-center rounded-lg"
-  [ngClass]="{
+<div *ngIf="coluna" class="flex flex-col gap-4 p-2 text-center border-solid rounded-lg border-3 w-90 h-fit" [ngClass]="{
     'bg-orange-300': coluna.ordem === 1, 'bg-yellow-300': coluna.ordem === 2,
     'bg-lime-300': coluna.ordem === 3
   }">
 
-  <h2 class="text-4xl ...">{{ coluna.titulo }}</h2>
-  
+  <h2 class="text-4xl font-bold text-[#262626]">{{ coluna.titulo }}</h2>
+
   <div class="flex flex-col gap-3">
-    <app-task-card 
-      *ngFor="let task of coluna.tarefas" [tarefa]="task"
-      [colunaId]="coluna.id"> </app-task-card>
+    <app-task-card *ngFor="let task of coluna.tarefas" [tarefa]="task" [colunaId]="coluna.id"> </app-task-card>
   </div>
 </div>
