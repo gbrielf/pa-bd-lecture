@@ -6,16 +6,14 @@ import { Button } from '@/components/ui/button';
 
 export const MenuBar: React.FC = () => {
   return (
-    <nav className="flex items-center justify-between p-4 bg-white border-b border-gray-200 shadow-sm">
+    <nav className="flex items-center justify-between p-2 bg-[#112F41] border-b border-white shadow-sm">
       <div className="flex items-center space-x-4">
-        <h1 className="text-xl font-bold text-gray-800">
-          Kanban Board
-        </h1>
+        <img src="/images/kanban-plan.png" alt="Kanban Plan" className="h-14 w-14" />
       </div>
 
       <div className="flex items-center space-x-4">
         <Link href="/kanban">
-          <Button variant="ghost" className="text-gray-600 hover:text-gray-800">
+          <Button variant="outline" className="bg-white text-gray-600 hover:text-gray-800 border-transparent hover:border-gray-300">
             Quadro
           </Button>
         </Link>
