@@ -2,6 +2,31 @@ import { Coluna } from '@/types/coluna.interface';
 
 const API_BASE_URL = 'https://api.example.com/api/colunas/';
 
+// Dados mock para desenvolvimento
+const MOCK_COLUNAS: Coluna[] = [
+  {
+    id: 1,
+    titulo: 'A Fazer',
+    ordem: 1,
+    projeto: 1,
+    tarefas: []
+  },
+  {
+    id: 2,
+    titulo: 'Em Progresso',
+    ordem: 2,
+    projeto: 1,
+    tarefas: []
+  },
+  {
+    id: 3,
+    titulo: 'Concluído',
+    ordem: 3,
+    projeto: 1,
+    tarefas: []
+  }
+];
+
 class ColunaService {
   private async handleResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
@@ -12,8 +37,13 @@ class ColunaService {
 
   async listColunas(): Promise<Coluna[]> {
     try {
-      const response = await fetch(API_BASE_URL);
-      return this.handleResponse<Coluna[]>(response);
+      // Usar dados mock por enquanto
+      console.log('Retornando dados mock das colunas');
+      return Promise.resolve([...MOCK_COLUNAS]);
+      
+      // Código para API real (descomentado quando a API estiver pronta)
+      // const response = await fetch(API_BASE_URL);
+      // return this.handleResponse<Coluna[]>(response);
     } catch (error) {
       console.error('Erro ao listar colunas:', error);
       throw error;
