@@ -2,31 +2,6 @@ import { Coluna } from '@/types/coluna.interface';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/kanban_api/colunas/';
 
-// Dados mock para desenvolvimento
-const MOCK_COLUNAS: Coluna[] = [
-  {
-    id: 1,
-    titulo: 'A Fazer',
-    ordem: 1,
-    projeto: 1,
-    tarefas: []
-  },
-  {
-    id: 2,
-    titulo: 'Em Progresso',
-    ordem: 2,
-    projeto: 1,
-    tarefas: []
-  },
-  {
-    id: 3,
-    titulo: 'Concluído',
-    ordem: 3,
-    projeto: 1,
-    tarefas: []
-  }
-];
-
 class ColunaService {
   private async handleResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
@@ -42,9 +17,7 @@ class ColunaService {
       return this.handleResponse<Coluna[]>(response);
     } catch (error) {
       console.error('Erro ao listar colunas:', error);
-      // Fallback para dados mock em caso de erro
-      console.log('Usando dados mock como fallback');
-      return Promise.resolve([...MOCK_COLUNAS]);
+      throw error;
     }
   }
 
