@@ -106,13 +106,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       {tarefa && (
         <Card className="w-full overflow-hidden border-2 border-white border-solid">
           <CardHeader>
-            <div className="flex items-center justify-between text-center">
-              <CardTitle className="text-lg font-semibold ">
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center justify-center flex-1 text-3xl font-semibold text-center">
                 {isEditing ? (
                   <Input
                     value={editData.titulo}
                     onChange={(e) => setEditData(prev => ({ ...prev, titulo: e.target.value }))}
-                    className="text-lg font-semibold"
+                    className="text-lg font-semibold text-center"
                   />
                 ) : (
                   tarefa.titulo
