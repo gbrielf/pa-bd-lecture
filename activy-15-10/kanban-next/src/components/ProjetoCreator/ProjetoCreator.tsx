@@ -115,7 +115,7 @@ export const ProjetoCreator: React.FC<ProjetoCreatorProps> = ({
   if (successMessage) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="max-w-md p-6 bg-green-50 border border-green-200 rounded-lg shadow-lg">
+        <div className="max-w-md p-6 border border-green-200 rounded-lg shadow-lg bg-green-50">
           <h2 className="mb-4 text-2xl font-bold text-green-800">
             Projeto Criado! 🎉
           </h2>
@@ -124,7 +124,7 @@ export const ProjetoCreator: React.FC<ProjetoCreatorProps> = ({
             <Button 
               onClick={() => setSuccessMessage('')}
               variant="outline"
-              className="border-green-600 text-green-600 hover:bg-green-50"
+              className="text-green-600 border-green-600 hover:bg-green-50"
             >
               Criar Outro Projeto
             </Button>
@@ -142,7 +142,7 @@ export const ProjetoCreator: React.FC<ProjetoCreatorProps> = ({
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="max-w-md p-6 bg-white rounded-lg shadow-lg w-full">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <h2 className="mb-4 text-2xl font-bold text-gray-800">
           Criar Novo Projeto
         </h2>

@@ -38,6 +38,9 @@ export const MenuBar: React.FC = () => {
     <nav className="flex items-center justify-between p-2 bg-[#112F41] border-b border-white shadow-sm">
       <div className="flex items-center space-x-4">
         <img src="/images/kanban-plan.png" alt="Kanban Plan" className="h-14 w-14" />
+      </div>
+
+      <div className="flex items-center space-x-4">
         
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -66,18 +69,16 @@ export const MenuBar: React.FC = () => {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
-
-      <div className="flex items-center space-x-4">
-        <Link href="/kanban">
-          <Button variant="outline" className="text-gray-600 bg-white border-transparent hover:text-gray-800 hover:border-gray-300">
-            Quadro
-          </Button>
-        </Link>
         
         <Link href="/criar-projeto">
           <Button variant="outline" className="text-green-600 bg-white border-green-200 hover:bg-green-50 hover:border-green-300">
             Novo Projeto
+          </Button>
+        </Link>
+
+        <Link href="/kanban">
+          <Button variant="outline" className="text-gray-600 bg-white border-transparent hover:text-gray-800 hover:border-gray-300">
+            Quadro
           </Button>
         </Link>
         
