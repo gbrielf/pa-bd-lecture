@@ -1,5 +1,5 @@
 from .models import Etiqueta, Usuario, Coluna, Tarefa, Comentario, Projeto 
-from .serializers import EtiquetaSerializer, RegistroSerializer, UsuarioSerializer, ColunaSerializer, TarefaSerializer, TarefaCreateSerializer, ComentarioSerializer, ProjetoSerializer 
+from .serializers import EtiquetaSerializer, RegistroSerializer, UsuarioSerializer, ColunaSerializer, TarefaSerializer, TarefaCreateSerializer, ComentarioSerializer, ProjetoSerializer, ProjetoCreateSerializer 
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import authentication_classes,permission_classes  # type: ignore
@@ -125,6 +125,24 @@ class ComentarioViewSet(viewsets.ModelViewSet):
 class ProjetoViewSet(viewsets.ModelViewSet):
     queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ProjetoCreateSerializer
+        return ProjetoSerializer
+
+    def create(self, request, *args, **kwargs):
+        # Usar ProjetoCreateSerializer para validação e criação
+        create_serializer = ProjetoCreateSerializer(
+            data=request.data,
+            context={'request': request}
+        )
+        create_serializer.is_valid(raise_exception=True)
+        projeto = create_serializer.save()
+        
+        # Usar ProjetoSerializer para resposta completa
+        response_serializer = ProjetoSerializer(projeto)
+        return Response(response_serializer.data, status=status.HTTP_201_CREATED)
 
     @action(detail=True, methods=['post'])
     def adicionar_membro(self, request, pk=None):

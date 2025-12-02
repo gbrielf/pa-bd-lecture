@@ -85,29 +85,33 @@ class ComentarioSimpleSerializer(serializers.ModelSerializer):
 
 # TarefaCreateSerializer para criação de tarefas
 class TarefaCreateSerializer(serializers.ModelSerializer):
-    # Apenas os campos que o frontend vai enviar
+    # Campos que o frontend vai enviar
     responsavel = serializers.IntegerField(required=False, allow_null=True)
+    coluna = serializers.IntegerField(required=True)
     
     class Meta:
         model = Tarefa
-        fields = ['titulo', 'descricao', 'responsavel', 'prioridade']
+        fields = ['titulo', 'descricao', 'responsavel', 'prioridade', 'coluna']
 
     def create(self, validated_data):
-        # Automaticamente definir coluna como 1 (To Do)
-        validated_data['coluna_id'] = 1
+        # Usar a coluna enviada pelo frontend
+        coluna_id = validated_data.pop('coluna')
+        validated_data['coluna_id'] = coluna_id
         
-        # Definir criador baseado na autenticação (por enquanto usando ID 1 como fallback)
+        # Definir criador (por enquanto usando ID 1 como fallback)
         request = self.context.get('request')
-        if request and hasattr(request, 'user') and request.user.is_authenticated:
+        if (request and hasattr(request, 'user') and
+                request.user.is_authenticated):
             validated_data['criador'] = request.user
         else:
-            # Fallback: usar o primeiro usuário (ID = 1) até implementarmos autenticação completa
-            from .models import Usuario
+            # Fallback: usar o primeiro usuário (ID = 1)
             validated_data['criador_id'] = 1
         
         # Se responsavel foi enviado como ID, converter para instância
-        if 'responsavel' in validated_data and validated_data['responsavel']:
-            validated_data['responsavel_id'] = validated_data.pop('responsavel')
+        if ('responsavel' in validated_data and
+                validated_data['responsavel']):
+            validated_data['responsavel_id'] = validated_data.pop(
+                'responsavel')
         
         return Tarefa.objects.create(**validated_data)
 
@@ -147,6 +151,46 @@ class ColunaSerializer(serializers.ModelSerializer):
         model = Coluna
         fields = ['id', 'titulo', 'ordem', 'projeto', 'nome_projeto', 'tarefas']
         read_only_fields = ['id']
+
+
+# ProjetoCreateSerializer para criação de projetos
+class ProjetoCreateSerializer(serializers.ModelSerializer):
+    data_inicio = serializers.DateField(required=False, allow_null=True)
+    data_fim = serializers.DateField(required=False, allow_null=True)
+    
+    class Meta:
+        model = Projeto
+        fields = ['nome', 'descricao', 'data_inicio', 'data_fim']
+
+    def create(self, validated_data):
+        # Definir proprietário baseado na autenticação
+        request = self.context.get('request')
+        if (request and hasattr(request, 'user') and
+                request.user.is_authenticated):
+            validated_data['proprietario'] = request.user
+        else:
+            # Fallback: usar o primeiro usuário (ID = 1)
+            validated_data['proprietario_id'] = 1
+        
+        # Criar o projeto
+        projeto = Projeto.objects.create(**validated_data)
+        
+        # Criar colunas padrão para o projeto (To Do, Doing, Done)
+        from .models import Coluna
+        colunas_padrao = [
+            {'titulo': 'To Do', 'ordem': 1},
+            {'titulo': 'Doing', 'ordem': 2},
+            {'titulo': 'Done', 'ordem': 3},
+        ]
+        
+        for coluna_data in colunas_padrao:
+            Coluna.objects.create(
+                projeto=projeto,
+                titulo=coluna_data['titulo'],
+                ordem=coluna_data['ordem']
+            )
+        
+        return projeto
 
 
 # ProjetoSerializer com colunas aninhadas, nomes dos membros e contagem de tarefas

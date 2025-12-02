@@ -67,6 +67,8 @@ class Projeto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField(blank=True, null=True)
     data_criacao = models.DateTimeField(auto_now_add=True)
+    data_inicio = models.DateField(blank=True, null=True)
+    data_fim = models.DateField(blank=True, null=True)
     proprietario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     membros = models.ManyToManyField(Usuario, related_name='membros_projetos', blank=True)
     

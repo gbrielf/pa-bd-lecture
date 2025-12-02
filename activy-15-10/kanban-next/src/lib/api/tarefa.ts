@@ -34,6 +34,11 @@ class TarefaService {
 
   async createTarefa(tarefa: Partial<Tarefa>): Promise<Tarefa> {
     try {
+      console.log('=== DEBUG SERVICE TAREFA ===');
+      console.log('Dados recebidos no service:', tarefa);
+      console.log('URL da API:', API_BASE_URL);
+      console.log('Body sendo enviado:', JSON.stringify(tarefa, null, 2));
+      
       const response = await fetch(API_BASE_URL, {
         method: 'POST',
         headers: {
@@ -41,7 +46,12 @@ class TarefaService {
         },
         body: JSON.stringify(tarefa),
       });
-      return this.handleResponse<Tarefa>(response);
+      
+      const resultado = await this.handleResponse<Tarefa>(response);
+      console.log('Resposta da API:', resultado);
+      console.log('============================');
+      
+      return resultado;
     } catch (error) {
       console.error('Erro ao criar tarefa:', error);
       throw error;

@@ -1,0 +1,777 @@
+[
+  {
+    "model": "core.usuario",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "email": "admin@kanban.com",
+      "first_name": "Administrador",
+      "last_name": "Sistema",
+      "telefone": "+55 11 99999-9999",
+      "is_staff": true,
+      "is_superuser": true,
+      "is_active": true,
+      "password": "pbkdf2_sha256$870000$cEGn8J0KjOQl0Q9T5q5qvG$8OFoEX9k/mD9zQH5oD5qvG8OFoEX9k/mD9zQH5oD5qvG="
+    }
+  },
+  {
+    "model": "core.usuario",
+    "pk": 2,
+    "fields": {
+      "username": "joao_silva",
+      "email": "joao.silva@kanban.com",
+      "first_name": "João",
+      "last_name": "Silva",
+      "telefone": "+55 11 98888-8888",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "password": "pbkdf2_sha256$870000$cEGn8J0KjOQl0Q9T5q5qvG$8OFoEX9k/mD9zQH5oD5qvG8OFoEX9k/mD9zQH5oD5qvG="
+    }
+  },
+  {
+    "model": "core.usuario",
+    "pk": 3,
+    "fields": {
+      "username": "maria_santos",
+      "email": "maria.santos@kanban.com",
+      "first_name": "Maria",
+      "last_name": "Santos",
+      "telefone": "+55 11 97777-7777",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "password": "pbkdf2_sha256$870000$cEGn8J0KjOQl0Q9T5q5qvG$8OFoEX9k/mD9zQH5oD5qvG8OFoEX9k/mD9zQH5oD5qvG="
+    }
+  },
+  {
+    "model": "core.usuario",
+    "pk": 4,
+    "fields": {
+      "username": "pedro_oliveira",
+      "email": "pedro.oliveira@kanban.com",
+      "first_name": "Pedro",
+      "last_name": "Oliveira",
+      "telefone": "+55 11 96666-6666",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "password": "pbkdf2_sha256$870000$cEGn8J0KjOQl0Q9T5q5qvG$8OFoEX9k/mD9zQH5oD5qvG8OFoEX9k/mD9zQH5oD5qvG="
+    }
+  },
+  {
+    "model": "core.usuario",
+    "pk": 5,
+    "fields": {
+      "username": "ana_costa",
+      "email": "ana.costa@kanban.com",
+      "first_name": "Ana",
+      "last_name": "Costa",
+      "telefone": "+55 11 95555-5555",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "password": "pbkdf2_sha256$870000$cEGn8J0KjOQl0Q9T5q5qvG$8OFoEX9k/mD9zQH5oD5qvG8OFoEX9k/mD9zQH5oD5qvG="
+    }
+  },
+  {
+    "model": "core.perfil",
+    "pk": 1,
+    "fields": {
+      "usuario": 1,
+      "tipo": "ADMINISTRADOR",
+      "telefone": "+55 11 99999-9999"
+    }
+  },
+  {
+    "model": "core.perfil",
+    "pk": 2,
+    "fields": {
+      "usuario": 2,
+      "tipo": "GERENTE",
+      "telefone": "+55 11 98888-8888"
+    }
+  },
+  {
+    "model": "core.perfil",
+    "pk": 3,
+    "fields": {
+      "usuario": 3,
+      "tipo": "DESENVOLVEDOR",
+      "telefone": "+55 11 97777-7777"
+    }
+  },
+  {
+    "model": "core.perfil",
+    "pk": 4,
+    "fields": {
+      "usuario": 4,
+      "tipo": "TESTER",
+      "telefone": "+55 11 96666-6666"
+    }
+  },
+  {
+    "model": "core.perfil",
+    "pk": 5,
+    "fields": {
+      "usuario": 5,
+      "tipo": "STAKEHOLDER",
+      "telefone": "+55 11 95555-5555"
+    }
+  },
+  {
+    "model": "core.etiqueta",
+    "pk": 1,
+    "fields": {
+      "nome": "Bug",
+      "cor": "#FF0000"
+    }
+  },
+  {
+    "model": "core.etiqueta",
+    "pk": 2,
+    "fields": {
+      "nome": "Feature",
+      "cor": "#00FF00"
+    }
+  },
+  {
+    "model": "core.etiqueta",
+    "pk": 3,
+    "fields": {
+      "nome": "Urgent",
+      "cor": "#FF6600"
+    }
+  },
+  {
+    "model": "core.etiqueta",
+    "pk": 4,
+    "fields": {
+      "nome": "Documentation",
+      "cor": "#0066FF"
+    }
+  },
+  {
+    "model": "core.etiqueta",
+    "pk": 5,
+    "fields": {
+      "nome": "Testing",
+      "cor": "#9900FF"
+    }
+  },
+  {
+    "model": "core.projeto",
+    "pk": 1,
+    "fields": {
+      "nome": "Sistema de Vendas Online",
+      "descricao": "Desenvolvimento de plataforma e-commerce completa com carrinho de compras, pagamento e gestão de estoque",
+      "data_criacao": "2024-11-01T10:00:00Z",
+      "proprietario": 2,
+      "membros": [2, 3, 4]
+    }
+  },
+  {
+    "model": "core.projeto",
+    "pk": 2,
+    "fields": {
+      "nome": "App Mobile Banking",
+      "descricao": "Aplicativo mobile para operações bancárias básicas como transferências, consulta de saldo e pagamentos",
+      "data_criacao": "2024-11-05T14:30:00Z",
+      "proprietario": 2,
+      "membros": [2, 3, 5]
+    }
+  },
+  {
+    "model": "core.projeto",
+    "pk": 3,
+    "fields": {
+      "nome": "Sistema de Gestão Escolar",
+      "descricao": "Plataforma web para gestão de alunos, professores, notas e frequência em instituições de ensino",
+      "data_criacao": "2024-11-10T09:15:00Z",
+      "proprietario": 1,
+      "membros": [1, 3, 4, 5]
+    }
+  },
+  {
+    "model": "core.projeto",
+    "pk": 4,
+    "fields": {
+      "nome": "API de Integração ERP",
+      "descricao": "API REST para integração entre diferentes sistemas ERP empresariais",
+      "data_criacao": "2024-11-15T16:20:00Z",
+      "proprietario": 2,
+      "membros": [2, 3]
+    }
+  },
+  {
+    "model": "core.projeto",
+    "pk": 5,
+    "fields": {
+      "nome": "Dashboard Analytics",
+      "descricao": "Dashboard interativo para visualização de dados e métricas de negócio em tempo real",
+      "data_criacao": "2024-11-20T11:45:00Z",
+      "proprietario": 1,
+      "membros": [1, 4, 5]
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 1,
+    "fields": {
+      "titulo": "To Do",
+      "ordem": 1,
+      "projeto": 1
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 2,
+    "fields": {
+      "titulo": "Doing",
+      "ordem": 2,
+      "projeto": 1
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 3,
+    "fields": {
+      "titulo": "Done",
+      "ordem": 3,
+      "projeto": 1
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 4,
+    "fields": {
+      "titulo": "To Do",
+      "ordem": 1,
+      "projeto": 2
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 5,
+    "fields": {
+      "titulo": "Doing",
+      "ordem": 2,
+      "projeto": 2
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 6,
+    "fields": {
+      "titulo": "Done",
+      "ordem": 3,
+      "projeto": 2
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 7,
+    "fields": {
+      "titulo": "To Do",
+      "ordem": 1,
+      "projeto": 3
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 8,
+    "fields": {
+      "titulo": "Doing",
+      "ordem": 2,
+      "projeto": 3
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 9,
+    "fields": {
+      "titulo": "Done",
+      "ordem": 3,
+      "projeto": 3
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 10,
+    "fields": {
+      "titulo": "To Do",
+      "ordem": 1,
+      "projeto": 4
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 11,
+    "fields": {
+      "titulo": "Doing",
+      "ordem": 2,
+      "projeto": 4
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 12,
+    "fields": {
+      "titulo": "Done",
+      "ordem": 3,
+      "projeto": 4
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 13,
+    "fields": {
+      "titulo": "To Do",
+      "ordem": 1,
+      "projeto": 5
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 14,
+    "fields": {
+      "titulo": "Doing",
+      "ordem": 2,
+      "projeto": 5
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 15,
+    "fields": {
+      "titulo": "Done",
+      "ordem": 3,
+      "projeto": 5
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 1,
+    "fields": {
+      "titulo": "Configurar estrutura do banco de dados",
+      "descricao": "Definir e implementar as tabelas principais do sistema de vendas",
+      "coluna": 1,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-01T10:30:00Z",
+      "data_conclusao": null,
+      "tags": [2, 3]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 2,
+    "fields": {
+      "titulo": "Desenvolver sistema de autenticação",
+      "descricao": "Implementar login, logout e registro de usuários",
+      "coluna": 2,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-02T09:00:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 3,
+    "fields": {
+      "titulo": "Criar interface do carrinho de compras",
+      "descricao": "Design e desenvolvimento da funcionalidade de carrinho",
+      "coluna": 3,
+      "responsavel": 4,
+      "criador": 2,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-03T14:20:00Z",
+      "data_conclusao": "2024-11-10T16:30:00Z",
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 4,
+    "fields": {
+      "titulo": "Integração com gateway de pagamento",
+      "descricao": "Configurar e testar integração com Stripe/PayPal",
+      "coluna": 1,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-04T11:15:00Z",
+      "data_conclusao": null,
+      "tags": [2, 3]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 5,
+    "fields": {
+      "titulo": "Testes de segurança do sistema",
+      "descricao": "Realizar testes de penetração e validação de segurança",
+      "coluna": 1,
+      "responsavel": 4,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-05T13:40:00Z",
+      "data_conclusao": null,
+      "tags": [5, 3]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 6,
+    "fields": {
+      "titulo": "Configurar ambiente de desenvolvimento mobile",
+      "descricao": "Setup do React Native e configuração inicial do projeto",
+      "coluna": 4,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-05T15:00:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 7,
+    "fields": {
+      "titulo": "Desenvolver tela de login mobile",
+      "descricao": "Interface e validações para autenticação no app",
+      "coluna": 5,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-06T10:20:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 8,
+    "fields": {
+      "titulo": "Implementar consulta de saldo",
+      "descricao": "Funcionalidade para visualizar saldo da conta",
+      "coluna": 6,
+      "responsavel": 5,
+      "criador": 2,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-07T09:30:00Z",
+      "data_conclusao": "2024-11-12T14:45:00Z",
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 9,
+    "fields": {
+      "titulo": "Desenvolver sistema de transferências",
+      "descricao": "PIX, TED e transferência entre contas",
+      "coluna": 4,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-08T16:10:00Z",
+      "data_conclusao": null,
+      "tags": [2, 3]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 10,
+    "fields": {
+      "titulo": "Testes de usabilidade mobile",
+      "descricao": "Validar experiência do usuário no aplicativo",
+      "coluna": 4,
+      "responsavel": 5,
+      "criador": 2,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-09T12:25:00Z",
+      "data_conclusao": null,
+      "tags": [5]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 11,
+    "fields": {
+      "titulo": "Modelagem do banco de dados escolar",
+      "descricao": "Definir entidades: alunos, professores, turmas, disciplinas",
+      "coluna": 7,
+      "responsavel": 3,
+      "criador": 1,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-10T10:00:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 12,
+    "fields": {
+      "titulo": "Desenvolver módulo de notas",
+      "descricao": "Sistema para lançamento e consulta de notas",
+      "coluna": 8,
+      "responsavel": 4,
+      "criador": 1,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-11T14:30:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 13,
+    "fields": {
+      "titulo": "Implementar controle de frequência",
+      "descricao": "Registro e relatórios de presença dos alunos",
+      "coluna": 9,
+      "responsavel": 5,
+      "criador": 1,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-12T11:15:00Z",
+      "data_conclusao": "2024-11-18T16:20:00Z",
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 14,
+    "fields": {
+      "titulo": "Portal do responsável/aluno",
+      "descricao": "Interface web para consulta de notas e frequência",
+      "coluna": 7,
+      "responsavel": 4,
+      "criador": 1,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-13T09:40:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 15,
+    "fields": {
+      "titulo": "Relatórios acadêmicos",
+      "descricao": "Boletins, histórico escolar e relatórios gerenciais",
+      "coluna": 7,
+      "responsavel": 5,
+      "criador": 1,
+      "prioridade": "Baixa",
+      "data_criacao": "2024-11-14T15:55:00Z",
+      "data_conclusao": null,
+      "tags": [2, 4]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 16,
+    "fields": {
+      "titulo": "Definir arquitetura da API",
+      "descricao": "Especificação REST, endpoints e estrutura de dados",
+      "coluna": 10,
+      "responsavel": 2,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-15T16:30:00Z",
+      "data_conclusao": null,
+      "tags": [2, 4]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 17,
+    "fields": {
+      "titulo": "Implementar autenticação OAuth",
+      "descricao": "Sistema de tokens para acesso seguro à API",
+      "coluna": 11,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-16T10:15:00Z",
+      "data_conclusao": null,
+      "tags": [2, 3]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 18,
+    "fields": {
+      "titulo": "Desenvolver conectores ERP",
+      "descricao": "Módulos específicos para SAP, Oracle, Totvs",
+      "coluna": 12,
+      "responsavel": 2,
+      "criador": 2,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-17T13:20:00Z",
+      "data_conclusao": "2024-11-22T17:40:00Z",
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 19,
+    "fields": {
+      "titulo": "Documentação técnica da API",
+      "descricao": "Swagger/OpenAPI e guias de integração",
+      "coluna": 10,
+      "responsavel": 3,
+      "criador": 2,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-18T14:45:00Z",
+      "data_conclusao": null,
+      "tags": [4]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 20,
+    "fields": {
+      "titulo": "Testes de carga da API",
+      "descricao": "Validar performance com alto volume de requisições",
+      "coluna": 10,
+      "responsavel": 2,
+      "criador": 2,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-19T11:30:00Z",
+      "data_conclusao": null,
+      "tags": [5, 3]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 21,
+    "fields": {
+      "titulo": "Configurar infraestrutura de dados",
+      "descricao": "Setup de banco de dados e ETL para o dashboard",
+      "coluna": 13,
+      "responsavel": 4,
+      "criador": 1,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-20T12:00:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 22,
+    "fields": {
+      "titulo": "Desenvolver gráficos interativos",
+      "descricao": "Implementar charts com D3.js/Chart.js",
+      "coluna": 14,
+      "responsavel": 5,
+      "criador": 1,
+      "prioridade": "Alta",
+      "data_criacao": "2024-11-21T09:20:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 23,
+    "fields": {
+      "titulo": "Sistema de alertas em tempo real",
+      "descricao": "Notificações automáticas baseadas em métricas",
+      "coluna": 15,
+      "responsavel": 4,
+      "criador": 1,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-22T16:40:00Z",
+      "data_conclusao": "2024-11-25T14:15:00Z",
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 24,
+    "fields": {
+      "titulo": "Filtros e drill-down de dados",
+      "descricao": "Funcionalidades para análise detalhada dos dados",
+      "coluna": 13,
+      "responsavel": 5,
+      "criador": 1,
+      "prioridade": "Média",
+      "data_criacao": "2024-11-23T10:25:00Z",
+      "data_conclusao": null,
+      "tags": [2]
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 25,
+    "fields": {
+      "titulo": "Exportação de relatórios",
+      "descricao": "Geração de PDF/Excel com dados do dashboard",
+      "coluna": 13,
+      "responsavel": 4,
+      "criador": 1,
+      "prioridade": "Baixa",
+      "data_criacao": "2024-11-24T15:10:00Z",
+      "data_conclusao": null,
+      "tags": [2, 4]
+    }
+  },
+  {
+    "model": "core.comentario",
+    "pk": 1,
+    "fields": {
+      "tarefa": 1,
+      "autor": 2,
+      "texto": "Iniciando a análise dos requisitos do banco de dados. Preciso da aprovação do DBA antes de prosseguir.",
+      "data_criacao": "2024-11-01T11:00:00Z"
+    }
+  },
+  {
+    "model": "core.comentario",
+    "pk": 2,
+    "fields": {
+      "tarefa": 2,
+      "autor": 3,
+      "texto": "JWT implementado com sucesso. Agora trabalhando na integração com o frontend.",
+      "data_criacao": "2024-11-02T14:30:00Z"
+    }
+  },
+  {
+    "model": "core.comentario",
+    "pk": 3,
+    "fields": {
+      "tarefa": 3,
+      "autor": 4,
+      "texto": "Interface do carrinho finalizada e testada. Pronta para homologação.",
+      "data_criacao": "2024-11-10T17:00:00Z"
+    }
+  },
+  {
+    "model": "core.comentario",
+    "pk": 4,
+    "fields": {
+      "tarefa": 7,
+      "autor": 3,
+      "texto": "Tela de login mobile em desenvolvimento. Encontrei alguns desafios com a validação biométrica.",
+      "data_criacao": "2024-11-06T16:45:00Z"
+    }
+  },
+  {
+    "model": "core.comentario",
+    "pk": 5,
+    "fields": {
+      "tarefa": 12,
+      "autor": 4,
+      "texto": "Módulo de notas quase concluído. Falta apenas implementar a funcionalidade de recuperação.",
+      "data_criacao": "2024-11-11T18:20:00Z"
+    }
+  }
+]

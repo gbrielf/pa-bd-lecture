@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { MenuBar } from "@/components/MenuBar/MenuBar";
+import { ProjectProvider } from "@/contexts/ProjectContext";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -24,8 +25,10 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} montserrat antialiased`}
       >
-        <MenuBar />
-        {children}
+        <ProjectProvider>
+          <MenuBar />
+          {children}
+        </ProjectProvider>
       </body>
     </html>
   );

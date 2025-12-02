@@ -1,6 +1,6 @@
 import { Projeto } from '@/types/projeto.interface';
 
-const API_BASE_URL = 'https://api.example.com/kanban_api/projetos/';
+const API_BASE_URL = 'http://127.0.0.1:8000/kanban_api/projetos/';
 
 class ProjetoService {
   private async handleResponse<T>(response: Response): Promise<T> {
@@ -30,8 +30,13 @@ class ProjetoService {
     }
   }
 
-  async createProjeto(projeto: Projeto): Promise<Projeto> {
+  async createProjeto(projeto: Partial<Projeto>): Promise<Projeto> {
     try {
+      console.log('=== DEBUG SERVICE PROJETO ===');
+      console.log('Dados recebidos no service:', projeto);
+      console.log('URL da API:', API_BASE_URL);
+      console.log('Body sendo enviado:', JSON.stringify(projeto, null, 2));
+      
       const response = await fetch(API_BASE_URL, {
         method: 'POST',
         headers: {
@@ -39,7 +44,12 @@ class ProjetoService {
         },
         body: JSON.stringify(projeto),
       });
-      return this.handleResponse<Projeto>(response);
+      
+      const resultado = await this.handleResponse<Projeto>(response);
+      console.log('Resposta da API:', resultado);
+      console.log('=============================');
+      
+      return resultado;
     } catch (error) {
       console.error('Erro ao criar projeto:', error);
       throw error;
