@@ -5,10 +5,9 @@ export interface Coluna {
   titulo: string;
   ordem: number;
   projeto: number;
+  nome_projeto: string;
   
-  // 👇 Esta linha é ESSENCIAL para o Front-end,
-  // mesmo não existindo no Django Model.
-  // Ela será criada pelo BoardStateService.
+  // Esta linha é criada pelo BoardStateService casando com as tarefas
   tarefas: Tarefa[]; 
 }
 // antes:

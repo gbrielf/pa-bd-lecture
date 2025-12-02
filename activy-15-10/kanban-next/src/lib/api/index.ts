@@ -1,8 +1,8 @@
 // API Services
-export { tarefaService } from './tarefa.service';
-export { colunaService } from './coluna.service';
-export { projetoService } from './projeto.service';
-export { etiquetaService } from './etiqueta.service';
+export { tarefaService } from './tarefa';
+export { colunaService } from './coluna';
+export { projetoService } from './projeto';
+export { etiquetaService } from './etiqueta';
 export { boardStateService } from './board-state';
 
 // Hooks

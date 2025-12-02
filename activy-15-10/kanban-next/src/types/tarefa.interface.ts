@@ -1,17 +1,31 @@
 export interface Tarefa {
   id: number;
   titulo: string;
-  descricao: string | null;
+  descricao: string;
+  coluna: number;
   prioridade: string;
   data_criacao: string;
   data_conclusao: string | null;
-  tags: any[]; // (ou Etiqueta[])
   
-  // 👇 Esta linha é a FK que o Django envia
-  // Nós a usamos para "costurar"
-  coluna: number; 
-  responsavel: number | null;
-  criador: number;
+  // Campos aninhados da API Django
+  responsavel?: {
+    id: number;
+    username: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+  } | null;
+  
+  criador?: {
+    id: number;
+    username: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+  } | null;
+  
+  tags_nomes: string[];
+  comentarios_count: number;
 }
 
 // antes:

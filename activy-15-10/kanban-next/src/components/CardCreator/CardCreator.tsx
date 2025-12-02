@@ -8,29 +8,27 @@ import { Tarefa } from '@/types/tarefa.interface';
 import { useRouter } from 'next/navigation';
 // 2. Definição da Interface (Props)
 interface CardCreatorProps {
-  // Props opcionais se necessário no futuro
+  onTaskCreated?: () => void;
 }
 
 // Interface para o formulário
 interface FormData {
   titulo: string;
   descricao: string;
-  responsavel: string;
-  criador: string;
+  responsavel: number | null;
   prioridade: string;
 }
 
 // 3. Definição do Componente Funcional
-export const CardCreator: React.FC<CardCreatorProps> = () => {
+export const CardCreator: React.FC<CardCreatorProps> = ({ onTaskCreated }) => {
   const router = useRouter();
   
   // Estado do formulário
   const [formData, setFormData] = useState<FormData>({
     titulo: '',
     descricao: '',
-    responsavel: '',
-    criador: '',
-    prioridade: 'Média'
+    responsavel: null,
+    prioridade: 'Média',
   });
 
   // Estado de loading
@@ -38,143 +36,170 @@ export const CardCreator: React.FC<CardCreatorProps> = () => {
 
   // Função para atualizar campos do formulário
   const handleInputChange = (field: keyof FormData, value: string) => {
+    let finalValue: string | number | null = value;
+
+    if (field === 'responsavel'){
+      const numValue = parseInt(value, 10);
+      finalValue = isNaN(numValue) || value === '' ? null : numValue;
+    }
+    
     setFormData(prev => ({
       ...prev,
-      [field]: value
+      [field]: finalValue
     }));
   };
 
   // Função de validação básica
   const isFormValid = () => {
-    return formData.titulo.trim() !== '' && formData.criador.trim() !== '';
+    return formData.titulo.trim() !== '';
   };
 
   // Função para enviar o formulário
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!isFormValid()) {
-      console.error('Formulário inválido!');
-      return;
-    }
+  // src/components/CardCreator/CardCreator.tsx
 
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  if (!isFormValid()) {
+    console.error('Formulário inválido');
+    return;
+  }
+
+  setIsSubmitting(true);
+  
+  try {
+    console.log('Enviando dados:', formData);
     
-    try {
-      console.log('Formulário válido. Enviando para a API real...', formData);
+    const response = await fetch('http://127.0.0.1:8000/kanban_api/tarefas/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok || response.status === 201) {
+      const result = await response.json();
+      console.log('Tarefa criada com sucesso:', result);
       
-      // Aqui você pode implementar a chamada para a API
-      const response = await fetch('http://localhost:8000/kanban_api/tarefas/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      // Limpar formulário
+      setFormData({
+        titulo: '',
+        descricao: '',
+        responsavel: null,
+        prioridade: 'Média',
       });
-
-      if (response.ok) {
-        const tarefaCriada = await response.json();
-        console.log('API respondeu com sucesso:', tarefaCriada);
-        
-        // Resetar formulário
-        setFormData({
-          titulo: '',
-          descricao: '',
-          responsavel: '',
-          criador: '',
-          prioridade: 'Média'
-        });
-        
-        // Navegar de volta para o kanban
-        router.push('/kanban');
-      } else {
-        throw new Error('Erro na API');
+      
+      alert('Tarefa criada com sucesso!');
+      
+      // Notificar o componente pai que a tarefa foi criada
+      if (onTaskCreated) {
+        onTaskCreated();
       }
-    } catch (error) {
-      console.error('Erro ao criar tarefa via API:', error);
-      // Aqui você pode adicionar uma mensagem de erro para o usuário
-    } finally {
-      setIsSubmitting(false);
+      
+    } else {
+      console.error("STATUS DE ERRO DA API:", response.status);
+      const errorBody = await response.json().catch(() => ({ message: 'Sem corpo de erro' }));
+      console.error("CORPO DE ERRO DA API:", errorBody);
+      throw new Error(`Erro na API: Status ${response.status}`);
     }
-  };
+  } catch (error) {
+    console.error('Erro ao criar tarefa:', error);
+    alert('Erro ao criar tarefa. Verifique o console para detalhes.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   // 7. Renderização (Substitui o template HTML com JSX)
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="max-w-md p-6 bg-white rounded-lg shadow-lg w-xs">
-        <h2 className="mb-4 text-2xl font-bold text-gray-800">
-          Crie Sua Nova Tarefa:
-        </h2>
+    <div className="max-w-md p-6 bg-white rounded-lg shadow-lg w-xs">
+      <h2 className="mb-4 text-2xl font-bold text-gray-800">
+        Crie Sua Nova Tarefa:
+      </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <Label htmlFor="titulo-da-nota" className="block text-sm font-medium text-gray-700">
-              Título
-            </Label>
-            <Input
-              type="text"
-              id="titulo-da-nota"
-              value={formData.titulo}
-              onChange={(e: any) => handleInputChange('titulo', e.target.value)}
-              placeholder="Título da tarefa"
-              required
-              className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
-            />
-          </div>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        
+        {/* TÍTULO */}
+        <div>
+          <Label htmlFor="titulo-da-nota" className="block text-sm font-medium text-gray-700">
+            Título
+          </Label>
+          <Input
+            type="text"
+            id="titulo-da-nota"
+            value={formData.titulo}
+            onChange={(e: any) => handleInputChange('titulo', e.target.value)}
+            placeholder="Título da tarefa"
+            required
+            className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
+          />
+        </div>
 
-          <div>
-            <Label htmlFor="descricao-da-nota" className="block text-sm font-medium text-gray-700">
-              Descrição
-            </Label>
-            <Textarea
-              id="descricao-da-nota"
-              value={formData.descricao}
-              onChange={(e: any) => handleInputChange('descricao', e.target.value)}
-              placeholder="Detalhes da tarefa..."
-              className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
-            />
-          </div>
+        {/* DESCRIÇÃO */}
+        <div>
+          <Label htmlFor="descricao-da-nota" className="block text-sm font-medium text-gray-700">
+            Descrição
+          </Label>
+          <Textarea
+            id="descricao-da-nota"
+            value={formData.descricao}
+            onChange={(e: any) => handleInputChange('descricao', e.target.value)}
+            placeholder="Detalhes da tarefa..."
+            className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
+          />
+        </div>
+        
 
-          <div>
-            <Label htmlFor="responsavel-pela-tarefa" className="block text-sm font-medium text-gray-700">
-              Responsável
-            </Label>
-            <Input
-              type="text"
-              id="responsavel-pela-tarefa"
-              value={formData.responsavel}
-              onChange={(e: any) => handleInputChange('responsavel', e.target.value)}
-              placeholder="ID do Responsável"
-              className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
-            />
-          </div>
 
-          <div>
-            <Label htmlFor="criador-da-tarefa" className="block text-sm font-medium text-gray-700">
-              Criador
-            </Label>
-            <Input
-              type="text"
-              id="criador-da-tarefa"
-              value={formData.criador}
-              onChange={(e: any) => handleInputChange('criador', e.target.value)}
-              placeholder="ID do Criador"
-              required
-              className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
-            />
-          </div>
+        {/* RESPONSÁVEL (FK) - Opcional */}
+        <div>
+          <Label htmlFor="responsavel-pela-tarefa" className="block text-sm font-medium text-gray-700">
+            ID do Responsável (opcional)
+          </Label>
+          <Input
+            type="number"
+            id="responsavel-pela-tarefa"
+            value={formData.responsavel || ''}
+            onChange={(e: any) => handleInputChange('responsavel', e.target.value)}
+            placeholder="Deixe vazio se não souber"
+            className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
+          />
+        </div>
 
-          <div>
-            <Button 
-              type="submit" 
-              className="w-full font-bold"
-              disabled={!isFormValid() || isSubmitting}
-            >
-              {isSubmitting ? 'Salvando...' : 'Salvar Tarefa'}
-            </Button>
-          </div>
-        </form>
-      </div>
+        {/* PRIORIDADE */}
+        <div>
+          <Label htmlFor="prioridade-tarefa" className="block text-sm font-medium text-gray-700">
+            Prioridade
+          </Label>
+          <select
+            id="prioridade-tarefa"
+            value={formData.prioridade}
+            onChange={(e) => handleInputChange('prioridade', e.target.value)}
+            className="w-full p-2 mt-1 text-gray-500 border border-gray-300 rounded-md focus:text-gray-500"
+          >
+            <option value="Baixa">Baixa</option>
+            <option value="Média">Média</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+
+
+        
+        {/* BOTÃO SUBMIT */}
+        <div>
+          <Button 
+            type="submit" 
+            className="w-full font-bold"
+            disabled={!isFormValid() || isSubmitting}
+          >
+            {isSubmitting ? 'Salvando...' : 'Salvar Tarefa'}
+          </Button>
+        </div>
+      </form>
     </div>
+  </div>
   );
 };

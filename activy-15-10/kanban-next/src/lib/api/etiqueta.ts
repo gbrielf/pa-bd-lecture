@@ -1,6 +1,6 @@
 import { Etiqueta } from '@/types/etiqueta.interface';
 
-const API_BASE_URL = 'https://api.example.com/api/etiquetas/';
+const API_BASE_URL = 'https://api.example.com/kanban_api/etiquetas/';
 
 class EtiquetaService {
   private async handleResponse<T>(response: Response): Promise<T> {

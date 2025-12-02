@@ -1,7 +1,7 @@
 import { Coluna } from '@/types/coluna.interface';
 import { Tarefa } from '@/types/tarefa.interface';
-import { tarefaService } from './tarefa.service';
-import { colunaService } from './coluna.service';
+import { tarefaService } from './tarefa';
+import { colunaService } from './coluna';
 
 type BoardStateListener = (colunas: Coluna[]) => void;
 

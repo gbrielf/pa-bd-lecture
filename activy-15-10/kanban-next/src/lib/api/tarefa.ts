@@ -1,6 +1,6 @@
 import { Tarefa } from '@/types/tarefa.interface';
 
-const API_BASE_URL = 'https://api.example.com/api/tarefas/';
+const API_BASE_URL = 'http://127.0.0.1:8000/kanban_api/tarefas/';
 
 // Dados mock para desenvolvimento
 const MOCK_TAREFAS: Tarefa[] = [
@@ -53,16 +53,14 @@ class TarefaService {
 
   async listTarefas(): Promise<Tarefa[]> {
     try {
-      // Usar dados mock por enquanto
-      console.log('Retornando dados mock das tarefas');
-      return Promise.resolve([...MOCK_TAREFAS]);
-      
-      // Código para API real (descomentado quando a API estiver pronta)
-      // const response = await fetch(API_BASE_URL);
-      // return this.handleResponse<Tarefa[]>(response);
+      console.log('Buscando tarefas da API Django:', API_BASE_URL);
+      const response = await fetch(API_BASE_URL);
+      return this.handleResponse<Tarefa[]>(response);
     } catch (error) {
       console.error('Erro ao listar tarefas:', error);
-      throw error;
+      // Fallback para dados mock em caso de erro
+      console.log('Usando dados mock como fallback');
+      return Promise.resolve([...MOCK_TAREFAS]);
     }
   }
 

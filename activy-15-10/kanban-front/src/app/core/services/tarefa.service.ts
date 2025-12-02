@@ -3,13 +3,14 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Tarefa } from '../models/tarefa.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TarefaService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'https://api.example.com/api/tarefas/';
+  private readonly apiUrl = `${environment.apiUrl}/tarefas/`;
 
   listTarefas(): Observable<Tarefa[]> {
     return this.http.get<Tarefa[]>(this.apiUrl).pipe(catchError((err) => throwError(() => err)));
@@ -42,6 +43,13 @@ export class TarefaService {
   deleteTarefa(id: number): Observable<void> {
     return this.http
       .delete<void>(`${this.apiUrl}${id}/`)
+      .pipe(catchError((err) => throwError(() => err)));
+  }
+
+  // Mover tarefa para outra coluna
+  moverTarefa(tarefaId: number, colunaId: number): Observable<Tarefa> {
+    return this.http
+      .patch<Tarefa>(`${this.apiUrl}${tarefaId}/mover_coluna/`, { coluna_id: colunaId })
       .pipe(catchError((err) => throwError(() => err)));
   }
 }

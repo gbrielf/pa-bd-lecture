@@ -31,4 +31,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("kanban_api/", include(router.urls)),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

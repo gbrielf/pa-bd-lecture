@@ -1,0 +1,74 @@
+[
+  {
+    "model": "core.usuario",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$...", 
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "Test",
+      "email": "admin@kanban.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-01-01T00:00:00Z",
+      "telefone": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.projeto",
+    "pk": 1,
+    "fields": {
+      "nome": "Projeto Principal de Teste",
+      "descricao": "Projeto fictício para testar a migração do frontend.",
+      "data_criacao": "2025-01-01T00:00:00Z",
+      "proprietario": 1, 
+      "membros": [1]
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 1,
+    "fields": {
+      "titulo": "To Do",
+      "ordem": 1,
+      "projeto": 1
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 2,
+    "fields": {
+      "titulo": "Doing",
+      "ordem": 2,
+      "projeto": 1
+    }
+  },
+  {
+    "model": "core.coluna",
+    "pk": 3,
+    "fields": {
+      "titulo": "Done",
+      "ordem": 3,
+      "projeto": 1
+    }
+  },
+  {
+    "model": "core.tarefa",
+    "pk": 1,
+    "fields": {
+        "titulo": "Ajustar Serializer do Django",
+        "descricao": "Garantir que os IDs das chaves estrangeiras sejam validados corretamente no POST.",
+        "coluna": 1, 
+        "responsavel": 1,
+        "criador": 1,
+        "prioridade": "Alta",
+        "data_criacao": "2025-01-01T00:00:00Z",
+        "data_conclusao": null,
+        "tags": []
+    }
+  }
+]

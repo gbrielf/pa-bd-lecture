@@ -3,13 +3,14 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Coluna } from '../models/coluna.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ColunaService{
     private readonly http = inject(HttpClient);
-    private readonly apiUrl = 'https://api.example.com/api/colunas/';
+    private readonly apiUrl = `${environment.apiUrl}/colunas/`;
 
     listColunas(): Observable<Coluna[]> {
         return this.http.get<Coluna[]>(this.apiUrl)

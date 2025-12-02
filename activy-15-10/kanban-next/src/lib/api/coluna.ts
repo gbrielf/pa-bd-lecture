@@ -1,6 +1,6 @@
 import { Coluna } from '@/types/coluna.interface';
 
-const API_BASE_URL = 'https://api.example.com/api/colunas/';
+const API_BASE_URL = 'http://127.0.0.1:8000/kanban_api/colunas/';
 
 // Dados mock para desenvolvimento
 const MOCK_COLUNAS: Coluna[] = [
@@ -37,16 +37,14 @@ class ColunaService {
 
   async listColunas(): Promise<Coluna[]> {
     try {
-      // Usar dados mock por enquanto
-      console.log('Retornando dados mock das colunas');
-      return Promise.resolve([...MOCK_COLUNAS]);
-      
-      // Código para API real (descomentado quando a API estiver pronta)
-      // const response = await fetch(API_BASE_URL);
-      // return this.handleResponse<Coluna[]>(response);
+      console.log('Buscando colunas da API Django:', API_BASE_URL);
+      const response = await fetch(API_BASE_URL);
+      return this.handleResponse<Coluna[]>(response);
     } catch (error) {
       console.error('Erro ao listar colunas:', error);
-      throw error;
+      // Fallback para dados mock em caso de erro
+      console.log('Usando dados mock como fallback');
+      return Promise.resolve([...MOCK_COLUNAS]);
     }
   }
 

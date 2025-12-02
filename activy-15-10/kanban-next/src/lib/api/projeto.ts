@@ -1,6 +1,6 @@
 import { Projeto } from '@/types/projeto.interface';
 
-const API_BASE_URL = 'https://api.example.com/api/projetos/';
+const API_BASE_URL = 'https://api.example.com/kanban_api/projetos/';
 
 class ProjetoService {
   private async handleResponse<T>(response: Response): Promise<T> {
